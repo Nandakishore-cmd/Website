@@ -1,0 +1,36 @@
+{
+  "agents": [
+    {
+      "name": "Research Agent",
+      "status": "active",
+      "lastRun": "2026-02-22T07:19:06.347Z"
+    },
+    {
+      "name": "Coding Agent",
+      "status": "active",
+      "lastRun": "2026-02-22T07:19:06.347Z"
+    }
+  ],
+  "checks": [
+    {
+      "results": [
+        {
+          "name": "detector",
+          "status": "unhealthy",
+          "responseTimeMs": 49,
+          "error": "connect ECONNREFUSED 127.0.0.1:3002",
+          "checkedAt": "2026-02-22T07:19:06.340Z"
+        },
+        {
+          "name": "server",
+          "status": "unhealthy",
+          "responseTimeMs": 3,
+          "error": "connect ECONNREFUSED 127.0.0.1:3001",
+          "checkedAt": "2026-02-22T07:19:06.346Z"
+        }
+      ],
+      "timestamp": "2026-02-22T07:19:06.348Z"
+    }
+  ],
+  "lastCheck": "2026-02-22T07:19:06.348Z"
+}
