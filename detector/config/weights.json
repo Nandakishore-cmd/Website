@@ -1,6 +1,9 @@
 {
-  "statistical": 0.30,
-  "linguistic": 0.25,
-  "aiMeta": 0.40,
-  "mlModel": 0.05
+  "statistical": 0.20,
+  "linguistic": 0.20,
+  "sentenceLevel": 0.20,
+  "stylometric": 0.15,
+  "coherence": 0.10,
+  "fingerprint": 0.10,
+  "readabilityForensics": 0.05
 }
