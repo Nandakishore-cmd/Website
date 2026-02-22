@@ -3,8 +3,11 @@ import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import { analyzeStatistical } from './statistical.js';
 import { analyzeLinguistic } from './linguistic.js';
-import { analyzeWithAI } from './aiMetaDetector.js';
-import { analyzeWithML } from './mlModelAnalyzer.js';
+import { analyzeSentenceLevel } from './sentenceAnalyzer.js';
+import { analyzeStylometric } from './stylometric.js';
+import { analyzeCoherence } from './coherence.js';
+import { analyzeFingerprint } from './fingerprint.js';
+import { analyzeReadabilityForensics } from './readabilityForensics.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const weights = JSON.parse(readFileSync(join(__dirname, '../config/weights.json'), 'utf-8'));
@@ -19,8 +22,11 @@ function computeWeightedScore(results) {
   const analyzerMap = {
     statistical: results.statistical,
     linguistic: results.linguistic,
-    aiMeta: results.aiMeta,
-    mlModel: results.mlModel,
+    sentenceLevel: results.sentenceLevel,
+    stylometric: results.stylometric,
+    coherence: results.coherence,
+    fingerprint: results.fingerprint,
+    readabilityForensics: results.readabilityForensics,
   };
 
   const available = Object.entries(analyzerMap).filter(([_, v]) => v !== null);
@@ -42,24 +48,18 @@ function computeWeightedScore(results) {
 export async function analyzeText(text) {
   const startTime = Date.now();
 
-  // Run statistical and linguistic in parallel (CPU-only), then AI meta (network)
-  const [statistical, linguistic] = await Promise.all([
+  // Run all 7 signals in parallel (all CPU-only, no network)
+  const [statistical, linguistic, sentenceLevel, stylometric, coherence, fingerprint, readabilityForensics] = await Promise.all([
     Promise.resolve(analyzeStatistical(text)),
     Promise.resolve(analyzeLinguistic(text)),
+    Promise.resolve(analyzeSentenceLevel(text)),
+    Promise.resolve(analyzeStylometric(text)),
+    Promise.resolve(analyzeCoherence(text)),
+    Promise.resolve(analyzeFingerprint(text)),
+    Promise.resolve(analyzeReadabilityForensics(text)),
   ]);
 
-  // AI meta-detection (may fail gracefully)
-  let aiMeta = null;
-  try {
-    aiMeta = await analyzeWithAI(text);
-  } catch (err) {
-    console.warn('AI meta-detection failed:', err.message);
-  }
-
-  // ML model (stub, returns null)
-  const mlModel = await analyzeWithML(text);
-
-  const results = { statistical, linguistic, aiMeta, mlModel };
+  const results = { statistical, linguistic, sentenceLevel, stylometric, coherence, fingerprint, readabilityForensics };
   const { score, effectiveWeights } = computeWeightedScore(results);
   const classification = classify(score);
   const words = text.split(/\s+/).filter(w => w.length > 0);
@@ -68,11 +68,15 @@ export async function analyzeText(text) {
     score,
     classification: classification.label,
     confidence: classification.confidence,
+    sentenceScores: sentenceLevel.sentenceScores || [],
     breakdown: {
       statistical: { composite: statistical.score, details: statistical.details },
       linguistic: { composite: linguistic.score, details: linguistic.details },
-      aiMeta: aiMeta ? { composite: aiMeta.score, details: aiMeta.details, provider: aiMeta.provider } : null,
-      mlModel: null,
+      sentenceLevel: { composite: sentenceLevel.score, details: sentenceLevel.details },
+      stylometric: { composite: stylometric.score, details: stylometric.details },
+      coherence: { composite: coherence.score, details: coherence.details },
+      fingerprint: { composite: fingerprint.score, details: fingerprint.details },
+      readabilityForensics: { composite: readabilityForensics.score, details: readabilityForensics.details },
     },
     weights,
     effectiveWeights,
@@ -80,6 +84,7 @@ export async function analyzeText(text) {
       textLength: text.length,
       wordCount: words.length,
       processingTimeMs: Date.now() - startTime,
+      signals: 7,
     },
   };
 }

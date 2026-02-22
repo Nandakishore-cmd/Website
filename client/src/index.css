@@ -1,7 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body {
-  @apply bg-gray-50 text-gray-900 antialiased;
+  @apply bg-[#030014] text-gray-100 antialiased;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.02);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(139,92,246,0.3);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(139,92,246,0.5);
+}
+
+.glass-input {
+  @apply bg-white/[0.04] backdrop-blur-xl border border-white/[0.08] rounded-xl text-gray-100 placeholder-gray-500;
+  @apply focus:outline-none focus:ring-2 focus:ring-purple-500/30 focus:border-purple-500/40;
+  transition: all 0.3s ease;
+}
+.glass-input:focus {
+  box-shadow: 0 0 20px rgba(139,92,246,0.1);
+}
+
+.neon-glow {
+  box-shadow: 0 0 15px rgba(139,92,246,0.15), 0 0 45px rgba(139,92,246,0.05);
 }

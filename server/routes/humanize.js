@@ -1,39 +1,30 @@
 import { Router } from 'express';
+import axios from 'axios';
 import { validateTextInput } from '../middleware/validateInput.js';
-import { humanizeWithClaude } from '../services/claudeService.js';
-import { humanizeWithOpenAI } from '../services/openaiService.js';
 
 const router = Router();
+const DETECTOR_URL = process.env.DETECTOR_URL || 'http://localhost:3002';
 
 router.post('/', validateTextInput, async (req, res, next) => {
   try {
     const { text, options = {} } = req.body;
-    const provider = options.provider || 'claude';
 
-    let result;
-    if (provider === 'openai') {
-      result = await humanizeWithOpenAI(text, options);
-    } else {
-      try {
-        result = await humanizeWithClaude(text, options);
-      } catch (claudeErr) {
-        // Fallback to OpenAI
-        try {
-          result = await humanizeWithOpenAI(text, options);
-        } catch (openaiErr) {
-          return next(new Error('Both AI providers are unavailable. Please check API keys.'));
-        }
-      }
-    }
-
-    res.json({
-      original: text,
-      humanized: result.humanized,
-      provider: result.provider,
-      style: result.style,
-      intensity: result.intensity,
+    const response = await axios.post(`${DETECTOR_URL}/humanize`, { text, options }, {
+      timeout: 120000, // 2 minute timeout for model inference
+      headers: { 'Content-Type': 'application/json' },
     });
+
+    res.json(response.data);
   } catch (err) {
+    if (err.code === 'ECONNREFUSED') {
+      return res.status(503).json({
+        error: 'Humanization service is unavailable',
+        code: 'HUMANIZER_UNAVAILABLE',
+      });
+    }
+    if (err.response) {
+      return res.status(err.response.status).json(err.response.data);
+    }
     next(err);
   }
 });

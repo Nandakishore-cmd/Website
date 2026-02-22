@@ -1,8 +1,8 @@
-export default function Button({ children, variant = 'primary', size = 'md', loading = false, disabled = false, className = '', ...props }) {
+export default function GlowButton({ children, variant = 'primary', size = 'md', loading = false, disabled = false, className = '', ...props }) {
   const variants = {
     primary: 'bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-500 hover:to-cyan-500 text-white shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40',
     secondary: 'bg-white/[0.06] hover:bg-white/[0.1] text-gray-200 border border-white/[0.1]',
-    outline: 'border border-purple-500/30 hover:border-purple-400/50 text-purple-300 hover:bg-purple-500/10',
+    outline: 'border border-purple-500/40 hover:border-purple-400/60 text-purple-300 hover:bg-purple-500/10',
     ghost: 'hover:bg-white/[0.06] text-gray-400 hover:text-gray-200',
     danger: 'bg-red-600/80 hover:bg-red-500/80 text-white shadow-lg shadow-red-500/20',
   };

@@ -1,0 +1,43 @@
+{
+  "transitionReplacements": {
+    "furthermore": ["also", "plus", "and", "besides that"],
+    "moreover": ["on top of that", "also", "and", "plus"],
+    "additionally": ["also", "and", "on top of that", "besides"],
+    "in conclusion": ["to sum up", "overall", "so", "all in all"],
+    "it is important to note that": ["keep in mind that", "note that", "remember that", "worth knowing:"],
+    "it is worth noting that": ["interestingly", "notably", "it's worth pointing out", "one thing to note:"],
+    "on the other hand": ["then again", "but", "however", "at the same time"],
+    "in other words": ["put simply", "basically", "that is to say", "meaning"],
+    "that being said": ["still", "but", "however", "even so"],
+    "with that in mind": ["knowing this", "given that", "so", "considering this"],
+    "having said that": ["still", "but then", "yet", "even so"],
+    "in this regard": ["here", "on this point", "in this case", "about this"],
+    "to summarize": ["in short", "briefly", "to sum up", "long story short"],
+    "in essence": ["basically", "at its core", "fundamentally", "simply put"],
+    "broadly speaking": ["generally", "overall", "as a whole", "in general"],
+    "it should be noted": ["note that", "keep in mind", "worth mentioning", "remember"],
+    "it goes without saying": ["obviously", "clearly", "naturally", "of course"],
+    "consequently": ["so", "as a result", "therefore", "because of this"],
+    "nevertheless": ["still", "yet", "but", "even so"],
+    "nonetheless": ["still", "yet", "but", "even so"]
+  },
+  "hedgingPhrases": [
+    "I think", "in my experience", "from what I've seen",
+    "it seems like", "probably", "maybe", "kind of",
+    "sort of", "I'd say", "in my view",
+    "honestly", "to be fair", "if you ask me",
+    "as far as I can tell", "my take is"
+  ],
+  "humanFragments": [
+    "Well, ", "Look, ", "Here's the thing — ", "Okay so ",
+    "Right, so ", "Thing is, ", "Honestly? ", "Real talk: ",
+    "Fun fact: ", "Quick note: ", "Side note — ",
+    "Not gonna lie, ", "Spoiler alert: ", "Plot twist: "
+  ],
+  "informalConnectors": [
+    "and honestly", "but really", "so yeah", "which is cool",
+    "pretty much", "kind of like", "you know", "I mean",
+    "at the end of the day", "for what it's worth",
+    "believe it or not", "lo and behold"
+  ]
+}

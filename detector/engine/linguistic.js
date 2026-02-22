@@ -9,56 +9,115 @@ const AI_TRANSITIONS = [
   'with that in mind', 'having said that', 'in this regard',
   'to summarize', 'in essence', 'broadly speaking',
   'it should be noted', 'it goes without saying',
+  'consequently', 'nevertheless', 'nonetheless',
+  'in addition to this', 'as a result', 'for instance',
+  'in particular', 'specifically', 'notably',
+  'to elaborate', 'to illustrate', 'in contrast',
 ];
 
-// Known AI telltale patterns
+// 80+ AI telltale patterns
 const AI_TELLTALE_PATTERNS = [
   /as an ai/i,
   /it'?s important to note/i,
   /let'?s delve into/i,
   /in today'?s digital landscape/i,
   /in today'?s world/i,
+  /in today'?s (?:rapidly |ever[- ])?(?:evolving|changing)/i,
   /it'?s worth mentioning/i,
   /at the end of the day/i,
   /in the realm of/i,
   /a testament to/i,
   /navigating the/i,
   /the landscape of/i,
-  /unlock(ing)? the (full )?potential/i,
-  /foster(ing)? a (sense of |culture of )?/i,
+  /unlock(?:ing)? the (?:full )?potential/i,
+  /foster(?:ing)? (?:a (?:sense|culture) of |innovation|growth)/i,
   /delve deeper/i,
   /tapestry of/i,
   /it'?s crucial to/i,
   /paramount importance/i,
   /seamlessly/i,
-  /leverage(d|s|ing)?/i,
-  /utilize(d|s|ing)?/i,
-  /facilitate(d|s|ing)?/i,
-  /comprehensive (guide|overview|analysis|understanding)/i,
+  /leverage(?:d|s|ing)?/i,
+  /utilize(?:d|s|ing)?/i,
+  /facilitate(?:d|s|ing)?/i,
+  /comprehensive (?:guide|overview|analysis|understanding)/i,
   /embark on/i,
-  /cutting-edge/i,
-  /game-?changer/i,
+  /cutting[- ]edge/i,
+  /game[- ]?changer/i,
   /in this article/i,
+  /(?:plays?|serve[sd]?) (?:a )?(?:crucial|vital|pivotal|key) role/i,
+  /it cannot be (?:overstated|understated)/i,
+  /a myriad of/i,
+  /a plethora of/i,
+  /a multitude of/i,
+  /the intricacies of/i,
+  /the nuances of/i,
+  /shed(?:s|ding)? light on/i,
+  /pav(?:e|es|ing) the way/i,
+  /(?:robust|holistic|scalable) (?:solution|approach|framework)/i,
+  /(?:empower|equip)(?:s|ing|ed)? (?:individuals|people|users|teams)/i,
+  /in the (?:ever[- ])?(?:evolving|changing) (?:landscape|world)/i,
+  /(?:stands?|remain[sd]?) as a (?:testament|beacon|reminder)/i,
+  /(?:it is|it'?s) (?:essential|imperative|crucial) (?:to|that)/i,
+  /one cannot (?:simply|merely|just)/i,
+  /(?:this|it) raises the question/i,
+  /by and large/i,
+  /all things considered/i,
+  /in light of (?:this|these|the)/i,
+  /the aforementioned/i,
+  /as (?:previously )?mentioned (?:earlier|above|before)/i,
+  /in the context of/i,
+  /from this perspective/i,
+  /through the lens of/i,
+  /when it comes to/i,
+  /in order to (?:ensure|achieve|maintain)/i,
+  /(?:a |the )?(?:key|critical|essential) (?:aspect|component|element|factor)/i,
+  /not only .{5,40} but also/i,
+  /whether .{5,30} or .{5,30}/i,
+  /(?:have|has) (?:significantly|dramatically|fundamentally) (?:changed|transformed)/i,
+  /(?:innovative|dynamic|versatile|sustainable) (?:solution|approach|platform)/i,
+  /(?:by|through) (?:leveraging|utilizing|implementing|harnessing)/i,
+  /in (?:an|this) (?:era|age) of/i,
+  /(?:the|this) (?:process|journey|experience) of/i,
+  /(?:ensure|maintain|establish)(?:s|ing)? (?:a )?(?:strong|solid|robust)/i,
+  /(?:significantly|substantially|considerably) (?:impact|improve|enhance)/i,
+  /(?:the|this) (?:importance|significance) of (?:this|these)/i,
+  /(?:empower|enable|prepare|position)(?:s|ing|ed)? .{0,20} to/i,
+  /(?:seamlessly|effortlessly|efficiently) (?:integrate|blend|combine)/i,
+  /the (?:key|secret|answer|solution) (?:to|for|lies)/i,
+  /(?:cornerstone|pillar|foundation) of/i,
+  /(?:with|given) (?:the|this|these) (?:rapid|ongoing|growing)/i,
+  /dive (?:deep|deeper) into/i,
+  /take (?:a )?(?:closer|deeper) look/i,
+  /(?:the|a) (?:world|realm|field|domain) of/i,
+  /(?:have you ever|did you know|are you looking)/i,
+  /(?:in|throughout) (?:recent years|history|the past)/i,
+  /(?:there'?s no denying|it'?s no secret)/i,
+  /(?:first|second|third|finally),? (?:it is|it'?s|we|let)/i,
+  /(?:this|these|such) (?:approach|method|technique|strategy)e?s? (?:offer|provide|enable)/i,
+  /(?:can|could|may|will) (?:significantly|dramatically|profoundly) (?:impact|affect)/i,
+  /(?:rich|vast|wide) (?:array|range|spectrum|variety) of/i,
+  /(?:at its core|at the heart of)/i,
+  /(?:redefine|revolutionize|reshape|transform)(?:s|d|ing)? (?:the|how|our)/i,
+  /(?:boast|offer|provide)(?:s|ing)? (?:a )?(?:wide|rich|vast|broad) (?:range|array|variety)/i,
+  /(?:strike|strikes|striking) (?:a )?(?:balance|chord)/i,
+  /(?:the bottom line|long story short|to put it simply)/i,
+  /(?:wrapping up|to wrap up|in closing)/i,
+  /(?:food for thought|something to consider)/i,
 ];
 
 /**
  * Type-Token Ratio — vocabulary richness.
- * Low TTR (repetitive vocabulary) → AI-like.
  */
 function typeTokenRatio(words) {
   if (words.length === 0) return { score: 0.5, ttr: 0 };
   const unique = new Set(words).size;
   const ttr = unique / words.length;
-  // Typical AI: TTR 0.3-0.5, Humans: 0.5-0.8 (for longer texts)
-  // For short texts TTR is naturally higher, so adjust by text length
-  const adjustedThreshold = words.length > 200 ? 0.45 : 0.55;
-  const score = clamp01(1 - (ttr - 0.3) / (0.5));
+  const score = clamp01(1 - (ttr - 0.3) / 0.5);
   return { score, ttr };
 }
 
 /**
  * Hapax legomena — words appearing exactly once.
- * Low ratio → more AI-like.
  */
 function hapaxLegomenaRatio(words) {
   if (words.length === 0) return { score: 0.5, ratio: 0 };
@@ -67,24 +126,21 @@ function hapaxLegomenaRatio(words) {
   const unique = freq.size;
   if (unique === 0) return { score: 0.5, ratio: 0 };
   const ratio = hapax / unique;
-  // AI text tends to have lower hapax ratio (0.4-0.55), humans higher (0.55-0.75)
   const score = clamp01(1 - (ratio - 0.4) / 0.35);
   return { score, ratio };
 }
 
 /**
- * Sentence structure variation — diversity of sentence lengths and starters.
+ * Sentence structure variation.
  */
 function sentenceStructureVariation(text) {
   const sentences = tokenizeSentences(text);
   if (sentences.length < 3) return { score: 0.5, lengthCV: 0, starterDiversity: 0 };
 
-  // Sentence length variation
   const lengths = sentences.map(s => tokenizeWords(s).length);
   const { mean, stdDev } = meanAndStdDev(lengths);
   const lengthCV = mean > 0 ? stdDev / mean : 0;
 
-  // Sentence starter diversity
   const starters = sentences.map(s => {
     const words = tokenizeWords(s);
     return words.length > 0 ? words[0] : '';
@@ -92,7 +148,6 @@ function sentenceStructureVariation(text) {
   const uniqueStarters = new Set(starters).size;
   const starterDiversity = starters.length > 0 ? uniqueStarters / starters.length : 0;
 
-  // Low variation → AI-like → higher score
   const lengthScore = clamp01(1 - (lengthCV - 0.2) / 0.5);
   const starterScore = clamp01(1 - (starterDiversity - 0.3) / 0.5);
 
@@ -104,7 +159,7 @@ function sentenceStructureVariation(text) {
 }
 
 /**
- * Flesch-Kincaid readability and its consistency across paragraphs.
+ * Flesch-Kincaid readability consistency.
  */
 function readabilityConsistency(text) {
   const sentences = tokenizeSentences(text);
@@ -114,24 +169,20 @@ function readabilityConsistency(text) {
     const words = tokenizeWords(sentence);
     if (words.length === 0) return 50;
     const syllables = words.reduce((sum, w) => sum + countSyllables(w), 0);
-    // Flesch Reading Ease
     return 206.835 - 1.015 * words.length - 84.6 * (syllables / Math.max(words.length, 1));
   });
 
   const { mean, stdDev } = meanAndStdDev(readabilityScores);
   const cv = mean !== 0 ? Math.abs(stdDev / mean) : 0;
-
-  // Consistent readability across sentences → AI-like
   const score = clamp01(1 - (cv - 0.1) / 0.6);
 
   return { score, avgReadability: mean, readabilityCV: cv };
 }
 
 /**
- * Count AI transition phrases relative to text length.
+ * Count AI transition phrases.
  */
 function transitionFrequency(text) {
-  const lowerText = text.toLowerCase();
   const words = tokenizeWords(text);
   if (words.length === 0) return { score: 0.5, count: 0, density: 0 };
 
@@ -142,8 +193,7 @@ function transitionFrequency(text) {
     if (matches) count += matches.length;
   }
 
-  const density = count / (words.length / 100); // per 100 words
-  // High density → AI-like
+  const density = count / (words.length / 100);
   const score = clamp01(density / 3);
 
   return { score, count, density };
@@ -167,15 +217,13 @@ function repetitionDetection(text) {
   const repeated = [...phrases.values()].filter(c => c >= 2).length;
   const total = phrases.size || 1;
   const ratio = repeated / total;
-
-  // Higher repetition → more AI-like
   const score = clamp01(ratio * 5);
 
   return { score, repeatedPhrases: repeated };
 }
 
 /**
- * Check for AI telltale patterns.
+ * Check for AI telltale patterns (80+).
  */
 function telltalePatterns(text) {
   let matches = 0;
@@ -188,14 +236,13 @@ function telltalePatterns(text) {
     }
   }
 
-  // Even 2-3 matches is a strong signal
-  const score = clamp01(matches / 4);
+  const score = clamp01(matches / 5);
 
   return { score, matchCount: matches, patterns: found };
 }
 
 /**
- * Run all linguistic analyses and return combined score.
+ * Run all linguistic analyses.
  */
 export function analyzeLinguistic(text) {
   const words = tokenizeWords(text);

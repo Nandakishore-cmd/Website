@@ -1,63 +1,72 @@
 import { Link } from 'react-router-dom';
-import { Pen, Search, Bot, Shield, Zap, Lock } from 'lucide-react';
-import Card from '../components/ui/Card';
-import Button from '../components/ui/Button';
+import { Pen, Search, Bot, Shield, Zap, Lock, Cpu, Wifi } from 'lucide-react';
+import GlassCard from '../components/ui/GlassCard';
+import GlowButton from '../components/ui/GlowButton';
+import GradientText from '../components/ui/GradientText';
 
 const features = [
   {
-    icon: Pen,
-    title: 'AI Humanizer',
-    description: 'Transform AI-generated text into natural, human-sounding content that bypasses detection.',
-    link: '/humanizer',
-    color: 'text-blue-600 bg-blue-100',
-  },
-  {
     icon: Search,
     title: 'AI Detector',
-    description: 'Advanced multi-signal detection engine combining statistical, linguistic, and AI-powered analysis.',
+    description: '7-signal indigenous detection engine. Statistical, linguistic, stylometric, coherence, fingerprint analysis — all running on YOUR CPU.',
     link: '/detector',
-    color: 'text-purple-600 bg-purple-100',
+    gradient: 'from-purple-500/20 to-purple-600/5',
+    iconColor: 'text-purple-400',
+  },
+  {
+    icon: Pen,
+    title: 'AI Humanizer',
+    description: 'Local transformer model + rule engine + self-verification loop. Beats every existing humanizer — no API keys needed.',
+    link: '/humanizer',
+    gradient: 'from-cyan-500/20 to-cyan-600/5',
+    iconColor: 'text-cyan-400',
   },
   {
     icon: Bot,
     title: 'Agent Dashboard',
-    description: 'Autonomous agents that research, monitor, and continuously improve detection accuracy.',
+    description: 'Autonomous agents that research, monitor, and continuously improve detection accuracy with real-time activity feed.',
     link: '/agents',
-    color: 'text-orange-600 bg-orange-100',
+    gradient: 'from-blue-500/20 to-blue-600/5',
+    iconColor: 'text-blue-400',
   },
 ];
 
 const stats = [
-  { icon: Zap, label: 'Multi-Signal Detection', value: '4 Analyzers' },
-  { icon: Shield, label: 'Weighted Scoring', value: 'Adaptive' },
-  { icon: Lock, label: 'Graceful Fallback', value: 'Always Available' },
+  { icon: Zap, label: '7-Signal Detection', value: '7 Analyzers' },
+  { icon: Cpu, label: '100% Local CPU', value: 'Indigenous' },
+  { icon: Lock, label: 'Zero API Keys', value: 'Offline Ready' },
+  { icon: Wifi, label: 'No Internet', value: 'After Install' },
 ];
 
 export default function Home() {
   return (
-    <div>
+    <div className="animate-fade-in">
       {/* Hero */}
-      <section className="bg-gradient-to-br from-brand-600 to-brand-800 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
-          <div className="text-center max-w-3xl mx-auto">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight">
+      <section className="relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-36">
+          <div className="text-center max-w-4xl mx-auto">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 text-sm mb-8 animate-slide-up">
+              <Cpu className="h-4 w-4" />
+              100% Indigenous — Zero APIs — Runs on YOUR machine
+            </div>
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight animate-slide-up" style={{ animationDelay: '0.1s' }}>
               Write Smarter with{' '}
-              <span className="text-brand-200">SafeWrite.ai</span>
+              <GradientText className="font-extrabold">SafeWrite.ai</GradientText>
             </h1>
-            <p className="mt-6 text-lg sm:text-xl text-brand-100 leading-relaxed">
-              Detect AI-generated text with precision. Humanize content with style.
-              Powered by advanced multi-signal analysis and autonomous improvement agents.
+            <p className="mt-6 text-lg sm:text-xl text-gray-400 leading-relaxed max-w-2xl mx-auto animate-slide-up" style={{ animationDelay: '0.2s' }}>
+              Detect AI-generated text with 7-signal precision. Humanize content with a local transformer model.
+              Everything runs on your CPU — no cloud, no API keys, no limits.
             </p>
-            <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center animate-slide-up" style={{ animationDelay: '0.3s' }}>
               <Link to="/detector">
-                <Button size="lg" className="bg-white text-brand-700 hover:bg-brand-50 w-full sm:w-auto">
-                  Try Detector
-                </Button>
+                <GlowButton size="lg">
+                  <Search className="h-5 w-5 mr-2" /> Try Detector
+                </GlowButton>
               </Link>
               <Link to="/humanizer">
-                <Button size="lg" variant="outline" className="border-brand-300 text-white hover:bg-brand-700 w-full sm:w-auto">
-                  Try Humanizer
-                </Button>
+                <GlowButton size="lg" variant="outline">
+                  <Pen className="h-5 w-5 mr-2" /> Try Humanizer
+                </GlowButton>
               </Link>
             </div>
           </div>
@@ -65,15 +74,15 @@ export default function Home() {
       </section>
 
       {/* Stats */}
-      <section className="border-b border-gray-200 bg-white">
+      <section className="border-y border-white/[0.06]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
             {stats.map(({ icon: Icon, label, value }) => (
               <div key={label} className="flex items-center gap-3 justify-center">
-                <Icon className="h-5 w-5 text-brand-600" />
+                <Icon className="h-5 w-5 text-purple-400" />
                 <div>
-                  <p className="text-sm text-gray-500">{label}</p>
-                  <p className="font-semibold text-gray-900">{value}</p>
+                  <p className="text-xs text-gray-500">{label}</p>
+                  <p className="font-semibold text-gray-200">{value}</p>
                 </div>
               </div>
             ))}
@@ -82,21 +91,23 @@ export default function Home() {
       </section>
 
       {/* Features */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-900">Powerful Tools</h2>
-          <p className="mt-3 text-lg text-gray-500">Everything you need for AI text analysis and transformation</p>
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
+        <div className="text-center mb-14">
+          <h2 className="text-3xl sm:text-4xl font-bold text-white">
+            Powerful <GradientText>Indigenous</GradientText> Tools
+          </h2>
+          <p className="mt-4 text-lg text-gray-400">Everything runs locally. No internet required after first install.</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {features.map(({ icon: Icon, title, description, link, color }) => (
+          {features.map(({ icon: Icon, title, description, link, gradient, iconColor }) => (
             <Link key={title} to={link}>
-              <Card className="h-full hover:shadow-md transition-shadow cursor-pointer">
-                <div className={`inline-flex p-3 rounded-lg ${color} mb-4`}>
-                  <Icon className="h-6 w-6" />
+              <GlassCard glow className="h-full hover:border-purple-500/20 transition-all duration-300 group cursor-pointer">
+                <div className={`inline-flex p-3 rounded-xl bg-gradient-to-br ${gradient} mb-4`}>
+                  <Icon className={`h-6 w-6 ${iconColor}`} />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">{title}</h3>
-                <p className="text-gray-500">{description}</p>
-              </Card>
+                <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-purple-300 transition-colors">{title}</h3>
+                <p className="text-gray-400 text-sm leading-relaxed">{description}</p>
+              </GlassCard>
             </Link>
           ))}
         </div>
