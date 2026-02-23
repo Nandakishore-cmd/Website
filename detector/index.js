@@ -40,6 +40,42 @@ app.post('/humanize', async (req, res) => {
   }
 });
 
+// Streaming humanize endpoint (SSE)
+app.post('/humanize/stream', async (req, res) => {
+  res.writeHead(200, {
+    'Content-Type': 'text/event-stream',
+    'Cache-Control': 'no-cache',
+    'Connection': 'keep-alive',
+  });
+
+  const { text, options = {} } = req.body;
+  if (!text || typeof text !== 'string' || text.trim().length === 0) {
+    res.write(`event: error\ndata: ${JSON.stringify({ error: 'Text is required' })}\n\n`);
+    return res.end();
+  }
+
+  try {
+    const { humanize } = await import('./humanizer/index.js');
+    const result = await humanize(text.trim(), options, (progress) => {
+      res.write(`event: progress\ndata: ${JSON.stringify(progress)}\n\n`);
+    });
+    res.write(`event: complete\ndata: ${JSON.stringify(result)}\n\n`);
+  } catch (err) {
+    res.write(`event: error\ndata: ${JSON.stringify({ error: err.message })}\n\n`);
+  }
+  res.end();
+});
+
+// Model status endpoint
+app.get('/humanize/status', async (_req, res) => {
+  try {
+    const { getModelStatus } = await import('./humanizer/localModel.js');
+    res.json(getModelStatus());
+  } catch (err) {
+    res.json({ status: 'error', error: err.message });
+  }
+});
+
 app.get('/health', (_req, res) => {
   res.json({ status: 'ok', signals: 7, engine: 'indigenous' });
 });

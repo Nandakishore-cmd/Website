@@ -29,4 +29,25 @@ router.post('/', validateTextInput, async (req, res, next) => {
   }
 });
 
+// Streaming humanize endpoint — proxies SSE from detector
+router.post('/stream', validateTextInput, async (req, res) => {
+  res.writeHead(200, {
+    'Content-Type': 'text/event-stream',
+    'Cache-Control': 'no-cache',
+    'Connection': 'keep-alive',
+  });
+
+  try {
+    const response = await axios.post(`${DETECTOR_URL}/humanize/stream`, req.body, {
+      responseType: 'stream',
+      timeout: 120000,
+      headers: { 'Content-Type': 'application/json' },
+    });
+    response.data.pipe(res);
+  } catch (err) {
+    res.write(`event: error\ndata: ${JSON.stringify({ error: 'Service unavailable' })}\n\n`);
+    res.end();
+  }
+});
+
 export default router;

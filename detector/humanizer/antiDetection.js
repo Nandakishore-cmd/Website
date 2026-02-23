@@ -4,6 +4,7 @@ import { dirname, join } from 'path';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const aiPatterns = JSON.parse(readFileSync(join(__dirname, 'data/aiPatterns.json'), 'utf-8'));
+const idiomData = JSON.parse(readFileSync(join(__dirname, 'data/idioms.json'), 'utf-8'));
 
 /**
  * Inject burstiness — vary sentence lengths to mimic human writing patterns.
@@ -99,6 +100,49 @@ function addHumanImperfections(text, style = 'natural') {
 }
 
 /**
+ * Inject idioms and colloquialisms for human texture.
+ * Skipped for academic style; limited to 1-2 per passage.
+ */
+function injectIdioms(text, style) {
+  if (style === 'academic') return text;
+
+  const sentences = text.split(/(?<=[.!?])\s+/);
+  if (sentences.length < 4) return text;
+
+  const pool = style === 'casual'
+    ? [...idiomData.colloquialisms, ...idiomData.humanExpressions]
+    : idiomData.colloquialisms;
+
+  // Replace generic summary phrases with colloquial alternatives
+  let result = text;
+  if (idiomData.summaryReplacements) {
+    for (const [phrase, alts] of Object.entries(idiomData.summaryReplacements)) {
+      const regex = new RegExp(`\\b${phrase.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'gi');
+      result = result.replace(regex, (match) => {
+        if (Math.random() < 0.4) return match;
+        const alt = alts[Math.floor(Math.random() * alts.length)];
+        return match[0] === match[0].toUpperCase()
+          ? alt.charAt(0).toUpperCase() + alt.slice(1) : alt;
+      });
+    }
+  }
+
+  // Inject 1 colloquialism as a sentence prefix at a natural break point
+  const resultSentences = result.split(/(?<=[.!?])\s+/);
+  if (Math.random() < 0.3 && resultSentences.length > 6) {
+    const insertIdx = Math.floor(resultSentences.length * 0.4) + Math.floor(Math.random() * 3);
+    const expression = pool[Math.floor(Math.random() * pool.length)];
+    if (resultSentences[insertIdx]) {
+      resultSentences[insertIdx] = expression.charAt(0).toUpperCase() + expression.slice(1) + ', ' +
+        resultSentences[insertIdx].charAt(0).toLowerCase() + resultSentences[insertIdx].slice(1);
+    }
+    result = resultSentences.join(' ');
+  }
+
+  return result;
+}
+
+/**
  * Apply all anti-detection optimizations.
  */
 export function applyAntiDetection(text, style = 'natural', intensity = 'medium') {
@@ -116,6 +160,11 @@ export function applyAntiDetection(text, style = 'natural', intensity = 'medium'
 
   // Stage 3: Human imperfections
   result = addHumanImperfections(result, style);
+
+  // Stage 4: Idiom/colloquialism injection (non-light only)
+  if (intensity !== 'light') {
+    result = injectIdioms(result, style);
+  }
 
   return result;
 }

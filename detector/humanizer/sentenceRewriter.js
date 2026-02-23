@@ -86,7 +86,7 @@ function reorderClauses(sentence) {
 /**
  * Apply structural rewrites to sentences.
  */
-export function rewriteSentences(sentences, intensity = 'medium') {
+export function rewriteSentences(sentences, intensity = 'medium', style = 'natural') {
   const rate = intensity === 'light' ? 0.2 : intensity === 'heavy' ? 0.5 : 0.35;
 
   let result = sentences.map(s => {
@@ -116,8 +116,23 @@ export function rewriteSentences(sentences, intensity = 'medium') {
 
   // Apply merging for short sentences
   if (Math.random() > 0.5) {
-    return mergeShortSentences(split);
+    result = mergeShortSentences(split);
+  } else {
+    result = split;
   }
 
-  return split;
+  // Creative style: inject deliberate fragments after long sentences for rhythm
+  if (style === 'creative') {
+    const fragments = ['Bold claim.', 'Worth noting.', 'A subtle shift.', 'Not always, though.', 'And yet.'];
+    const withFragments = [];
+    for (const s of result) {
+      withFragments.push(s);
+      if (s.split(/\s+/).length > 20 && Math.random() < 0.25) {
+        withFragments.push(fragments[Math.floor(Math.random() * fragments.length)]);
+      }
+    }
+    result = withFragments;
+  }
+
+  return result;
 }
