@@ -40,5 +40,10 @@
     "here's the kicker", "plot twist", "spoiler alert",
     "hot take", "unpopular opinion", "fun fact",
     "real talk", "pro tip", "for what it's worth"
-  ]
+  ],
+  "summaryReplacements": {
+    "in conclusion": ["long story short", "bottom line", "at the end of the day"],
+    "to summarize": ["in a nutshell", "the big picture is", "the takeaway here is"],
+    "overall": ["all in all", "big picture", "when you zoom out"]
+  }
 }

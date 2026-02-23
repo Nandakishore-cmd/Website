@@ -17,7 +17,7 @@ import { selfVerify } from './selfVerifier.js';
  *
  * Styles: natural, casual, academic, creative
  */
-export async function humanize(text, options = {}) {
+export async function humanize(text, options = {}, onProgress = null) {
   const {
     style = 'natural',
     intensity = 'medium',
@@ -25,47 +25,64 @@ export async function humanize(text, options = {}) {
   } = options;
 
   const startTime = Date.now();
+  const emit = (stage, detail) => onProgress?.({ stage, detail, elapsed: Date.now() - startTime });
   let current = text;
 
   // Stage 1: Parse sentences
+  emit('parse', 'Parsing sentences...');
   const parsed = parseSentences(current);
   let sentences = parsed.map(s => s.text);
+  emit('parse', `Found ${sentences.length} sentences`);
 
   // Stage 2: Local transformer paraphrasing (medium/heavy only)
   if (intensity === 'medium' || intensity === 'heavy') {
+    emit('model', 'Loading paraphrase engine...');
     try {
       sentences = await paraphraseBatch(sentences);
+      emit('model', 'Paraphrasing complete');
     } catch (err) {
+      emit('model', 'Model unavailable, using rule-based fallback');
       console.warn('Model paraphrasing failed, using rule-based only:', err.message);
     }
   }
 
   // Stage 3a: Synonym replacement
+  emit('rules', 'Applying synonym replacement...');
   current = sentences.join(' ');
   current = replaceWithSynonyms(current, intensity);
 
   // Stage 3b: Sentence rewriting (structure transforms)
-  sentences = current.split(/(?<=[.!?])\s+/).filter(s => s.trim().length > 0);
-  sentences = rewriteSentences(sentences, intensity);
+  emit('rules', 'Rewriting sentence structures...');
+  sentences = parseSentences(current).map(s => s.text);
+  sentences = rewriteSentences(sentences, intensity, style);
   current = sentences.join(' ');
 
   // Stage 3c: Discourse pattern breaking
+  emit('rules', 'Breaking discourse patterns...');
   current = breakDiscoursePatterns(current, intensity);
 
   // Stage 3d: Vocabulary enrichment
+  emit('rules', 'Enriching vocabulary...');
   current = enrichVocabulary(current, style, intensity);
 
   // Stage 4: Anti-detection optimization
+  emit('antidetect', 'Applying anti-detection optimizations...');
   current = applyAntiDetection(current, style, intensity);
 
   // Stage 5: Self-verification loop (heavy/strong only)
   let verificationResult = null;
   if (intensity === 'heavy') {
     for (let i = 0; i < maxIterations; i++) {
+      emit('verify', `Self-verification pass ${i + 1} of ${maxIterations}...`);
       const verification = await selfVerify(current);
       verificationResult = verification;
 
-      if (verification.passed) break;
+      if (verification.passed) {
+        emit('verify', `Passed verification (score: ${Math.round(verification.score * 100)}%)`);
+        break;
+      }
+
+      emit('verify', `Score ${Math.round(verification.score * 100)}% — re-processing flagged content...`);
 
       // Re-process flagged sentences more aggressively
       if (verification.flaggedSentences.length > 0) {
@@ -87,6 +104,7 @@ export async function humanize(text, options = {}) {
 
   // Clean up double spaces, trailing whitespace
   current = current.replace(/\s+/g, ' ').trim();
+  emit('complete', 'Done!');
 
   return {
     original: text,

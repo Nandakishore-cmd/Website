@@ -13,7 +13,7 @@ export default function Humanizer() {
   const [style, setStyle] = useState('natural');
   const [intensity, setIntensity] = useState('medium');
   const [copied, setCopied] = useState(false);
-  const { data, loading, error, humanize, reset } = useHumanize();
+  const { data, loading, error, progress, humanize, reset } = useHumanize();
 
   const handleHumanize = () => {
     if (text.trim().length > 0) {
@@ -118,8 +118,19 @@ export default function Humanizer() {
           {loading && (
             <div className="flex flex-col items-center py-16">
               <LoadingSpinner size="lg" />
-              <p className="mt-4 text-gray-400">Humanizing with local AI engine...</p>
-              <p className="mt-1 text-xs text-gray-600">{intensity === 'heavy' ? 'Running self-verification loop...' : 'Applying transforms...'}</p>
+              {progress ? (
+                <>
+                  <p className="mt-4 text-gray-300 font-medium">{progress.detail}</p>
+                  <p className="mt-1 text-xs text-gray-500">
+                    Stage: {progress.stage} | {Math.round(progress.elapsed / 1000)}s elapsed
+                  </p>
+                </>
+              ) : (
+                <>
+                  <p className="mt-4 text-gray-400">Starting humanization...</p>
+                  <p className="mt-1 text-xs text-gray-600">{intensity === 'heavy' ? 'Preparing self-verification loop...' : 'Initializing transforms...'}</p>
+                </>
+              )}
             </div>
           )}
 

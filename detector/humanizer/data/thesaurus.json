@@ -44,7 +44,6 @@
   "essentially": ["basically", "fundamentally", "at its core", "in essence"],
   "endeavor": ["effort", "attempt", "try", "undertaking", "project", "venture"],
   "encompass": ["include", "cover", "contain", "span", "involve", "take in"],
-  "facilitate": ["help", "aid", "support", "enable", "assist", "make possible"],
   "mitigate": ["reduce", "lessen", "ease", "soften", "minimize", "alleviate"],
   "exemplify": ["show", "illustrate", "demonstrate", "represent", "typify"],
   "proliferation": ["spread", "growth", "increase", "expansion", "rise"],
@@ -74,5 +73,278 @@
   "propensity": ["tendency", "inclination", "likelihood", "habit", "leaning"],
   "quintessential": ["typical", "classic", "perfect", "ideal", "definitive"],
   "salient": ["key", "main", "important", "notable", "prominent"],
-  "thereby": ["so", "in that way", "thus", "by doing so", "as a result"]
+  "thereby": ["so", "in that way", "thus", "by doing so", "as a result"],
+
+  "ascertain": ["find out", "figure out", "determine", "learn", "discover"],
+  "deliberate": ["think over", "consider", "weigh", "discuss", "debate"],
+  "contemplate": ["consider", "think about", "reflect on", "mull over", "ponder"],
+  "postulate": ["suggest", "propose", "claim", "argue", "put forward"],
+  "substantiate": ["prove", "confirm", "back up", "support", "verify"],
+  "corroborate": ["confirm", "support", "back up", "verify", "validate"],
+  "propagate": ["spread", "promote", "pass on", "share", "circulate"],
+  "extrapolate": ["predict", "estimate", "infer", "project", "extend"],
+  "disseminate": ["spread", "share", "distribute", "circulate", "broadcast"],
+  "amalgamate": ["combine", "merge", "blend", "mix", "unite"],
+  "necessitate": ["require", "demand", "call for", "make necessary"],
+  "exacerbate": ["worsen", "make worse", "intensify", "aggravate"],
+  "ameliorate": ["improve", "better", "enhance", "fix", "upgrade"],
+  "eradicate": ["eliminate", "remove", "wipe out", "get rid of", "stamp out"],
+  "perpetuate": ["continue", "maintain", "keep going", "sustain", "prolong"],
+  "circumvent": ["avoid", "get around", "bypass", "sidestep", "dodge"],
+  "encapsulate": ["capture", "sum up", "contain", "wrap up", "express"],
+  "promulgate": ["announce", "declare", "promote", "spread", "make known"],
+  "proliferate": ["spread", "multiply", "grow", "increase", "expand"],
+  "extricate": ["free", "remove", "pull out", "release", "get out of"],
+  "juxtaposition": ["contrast", "comparison", "side-by-side", "pairing"],
+  "interplay": ["interaction", "exchange", "back-and-forth", "relationship", "connection"],
+  "dichotomy": ["divide", "split", "contrast", "gap", "difference"],
+  "prerequisite": ["requirement", "must-have", "need", "condition", "essential"],
+  "ramification": ["consequence", "result", "effect", "outcome", "impact"],
+
+  "notwithstanding": ["despite", "regardless of", "even with", "in spite of"],
+  "henceforth": ["from now on", "going forward", "from this point"],
+  "hitherto": ["until now", "so far", "up to this point", "previously"],
+  "whereby": ["by which", "through which", "where"],
+  "therein": ["in that", "in there", "within that"],
+  "thereof": ["of that", "of it", "from that"],
+  "herein": ["in this", "here", "within this"],
+  "forthwith": ["immediately", "right away", "at once", "promptly"],
+  "aforementioned": ["mentioned earlier", "noted above", "discussed before"],
+  "whilst": ["while", "as", "during"],
+  "hereafter": ["from now on", "after this", "going forward"],
+
+  "inherently": ["naturally", "by nature", "at its core", "fundamentally"],
+  "intrinsically": ["naturally", "by nature", "at its core", "fundamentally"],
+  "remarkably": ["surprisingly", "notably", "impressively", "really"],
+  "profoundly": ["deeply", "greatly", "powerfully", "intensely"],
+  "meticulously": ["carefully", "thoroughly", "with great care", "precisely"],
+  "judiciously": ["wisely", "carefully", "sensibly", "thoughtfully"],
+  "unequivocally": ["clearly", "without doubt", "definitely", "for sure"],
+  "categorically": ["absolutely", "completely", "totally", "flatly"],
+  "disproportionately": ["unevenly", "unfairly", "excessively", "too much"],
+  "predominantly": ["mostly", "mainly", "largely", "chiefly", "for the most part"],
+  "invariably": ["always", "without fail", "every time", "consistently"],
+  "ostensibly": ["seemingly", "apparently", "on the surface", "supposedly"],
+  "exponentially": ["rapidly", "dramatically", "hugely", "by leaps and bounds"],
+  "inextricably": ["closely", "tightly", "inseparably", "deeply"],
+  "demonstrably": ["clearly", "obviously", "noticeably", "visibly"],
+  "inexorably": ["unavoidably", "inevitably", "steadily", "relentlessly"],
+  "discernibly": ["noticeably", "visibly", "clearly", "obviously"],
+  "appreciably": ["noticeably", "considerably", "significantly", "measurably"],
+
+  "cutting-edge": ["latest", "newest", "advanced", "modern", "leading"],
+  "state-of-the-art": ["latest", "modern", "top-of-the-line", "advanced"],
+  "groundbreaking": ["new", "pioneering", "revolutionary", "fresh", "original"],
+  "overarching": ["broad", "overall", "main", "central", "general"],
+  "far-reaching": ["wide", "broad", "extensive", "sweeping", "significant"],
+  "wide-ranging": ["broad", "diverse", "varied", "extensive", "sweeping"],
+  "well-established": ["proven", "recognized", "trusted", "known", "accepted"],
+  "deep-seated": ["deep", "ingrained", "rooted", "entrenched", "strong"],
+  "forward-thinking": ["progressive", "modern", "ahead of the curve", "visionary"],
+  "thought-provoking": ["interesting", "stimulating", "engaging", "eye-opening"],
+  "noteworthy": ["notable", "remarkable", "worth noting", "interesting", "significant"],
+  "commendable": ["praiseworthy", "admirable", "impressive", "good", "laudable"],
+  "indispensable": ["essential", "vital", "necessary", "must-have", "critical"],
+  "formidable": ["impressive", "powerful", "tough", "daunting", "mighty"],
+  "palpable": ["obvious", "clear", "noticeable", "tangible", "real"],
+  "lucrative": ["profitable", "rewarding", "money-making", "worthwhile"],
+  "feasible": ["possible", "doable", "practical", "viable", "achievable"],
+  "pragmatic": ["practical", "realistic", "down-to-earth", "sensible"],
+  "volatile": ["unstable", "unpredictable", "changeable", "uncertain"],
+  "nascent": ["new", "emerging", "budding", "early-stage", "young"],
+  "burgeoning": ["growing", "expanding", "booming", "rising", "thriving"],
+  "pervasive": ["widespread", "common", "everywhere", "prevalent", "rampant"],
+  "arduous": ["difficult", "tough", "demanding", "hard", "grueling"],
+  "efficacious": ["effective", "successful", "useful", "helpful", "productive"],
+  "exhaustive": ["thorough", "complete", "detailed", "in-depth", "full"],
+  "ancillary": ["extra", "supporting", "secondary", "additional", "supplementary"],
+  "rudimentary": ["basic", "simple", "elementary", "fundamental", "introductory"],
+  "tangential": ["unrelated", "side", "peripheral", "off-topic", "secondary"],
+  "nebulous": ["vague", "unclear", "fuzzy", "hazy", "ill-defined"],
+  "cogent": ["convincing", "compelling", "strong", "persuasive", "logical"],
+
+  "stakeholder": ["interested party", "participant", "player", "person involved"],
+  "deliverable": ["output", "result", "product", "work product"],
+  "actionable": ["practical", "useful", "doable", "concrete", "hands-on"],
+  "bandwidth": ["capacity", "time", "resources", "availability"],
+  "alignment": ["agreement", "coordination", "consistency", "match"],
+  "touchpoint": ["contact point", "interaction", "connection", "meeting point"],
+  "synergize": ["work together", "combine", "collaborate", "team up"],
+  "incentivize": ["encourage", "motivate", "reward", "push", "drive"],
+  "operationalize": ["put into action", "apply", "carry out", "implement"],
+  "conceptualize": ["imagine", "envision", "picture", "think up", "design"],
+  "contextualize": ["put in context", "frame", "situate", "explain"],
+  "hypothesize": ["guess", "suggest", "theorize", "predict", "speculate"],
+  "scrutinize": ["examine", "inspect", "study", "look closely at", "review"],
+  "synthesize": ["combine", "merge", "blend", "bring together", "integrate"],
+  "prioritize": ["rank", "focus on", "put first", "sort by importance"],
+  "spearhead": ["lead", "drive", "champion", "head up", "pioneer"],
+
+  "plethora": ["abundance", "wealth", "tons of", "loads of", "many"],
+  "myriad": ["many", "countless", "lots of", "a huge number of", "endless"],
+  "manifold": ["many", "varied", "numerous", "multiple", "diverse"],
+  "copious": ["plenty of", "lots of", "abundant", "generous", "ample"],
+  "sparse": ["thin", "scarce", "limited", "scattered", "few"],
+  "requisite": ["required", "needed", "necessary", "essential"],
+  "superfluous": ["unnecessary", "extra", "unneeded", "surplus", "redundant"],
+  "analogous": ["similar", "comparable", "like", "parallel", "related"],
+  "disparate": ["different", "unequal", "varied", "dissimilar", "contrasting"],
+  "commensurate": ["proportional", "matching", "fitting", "appropriate"],
+  "latent": ["hidden", "dormant", "underlying", "potential", "inactive"],
+  "endemic": ["common", "native", "widespread", "built-in", "rooted"],
+  "ephemeral": ["short-lived", "temporary", "fleeting", "brief", "passing"],
+
+  "accordingly": ["so", "therefore", "as a result", "for this reason"],
+  "conversely": ["on the other hand", "in contrast", "by contrast", "however"],
+  "simultaneously": ["at the same time", "together", "in parallel", "alongside"],
+  "ultimately": ["in the end", "finally", "at the end of the day", "eventually"],
+  "arguably": ["possibly", "maybe", "some would say", "it could be said"],
+  "admittedly": ["to be fair", "granted", "sure", "yes"],
+  "irrespective": ["regardless", "no matter what", "either way", "despite"],
+  "pertaining to": ["about", "related to", "concerning", "regarding", "on"],
+  "in lieu of": ["instead of", "in place of", "rather than"],
+  "in light of": ["given", "considering", "because of", "due to"],
+  "with respect to": ["about", "regarding", "when it comes to", "on"],
+  "in accordance with": ["following", "based on", "per", "in line with"],
+  "in tandem with": ["alongside", "together with", "along with", "paired with"],
+
+  "it is important to note that": ["keep in mind that", "note that", "worth knowing", "one key thing is"],
+  "it is worth noting that": ["interestingly", "notably", "worth pointing out", "one thing to note"],
+  "it should be noted that": ["note that", "keep in mind", "worth mentioning", "remember"],
+  "plays a crucial role": ["matters a lot", "is really important", "has a big impact"],
+  "a wide range of": ["many different", "all sorts of", "a variety of", "lots of"],
+  "in the context of": ["when it comes to", "regarding", "in terms of", "for"],
+  "at the end of the day": ["ultimately", "when all is said and done", "in the end"],
+  "for the purpose of": ["to", "in order to", "so as to", "for"],
+  "due to the fact that": ["because", "since", "as", "given that"],
+  "in terms of": ["when it comes to", "regarding", "for", "about"],
+  "with regard to": ["about", "regarding", "concerning", "on"],
+  "a significant amount of": ["a lot of", "plenty of", "much", "considerable"],
+  "take into consideration": ["consider", "think about", "keep in mind", "factor in"],
+  "has the potential to": ["could", "might", "can", "may well"],
+  "serves as a": ["is a", "acts as a", "works as a", "functions as a"],
+  "a growing body of": ["more and more", "increasing", "mounting"],
+  "lends itself to": ["works well for", "is suited to", "fits", "suits"],
+
+  "run": {
+    "noun": ["streak", "stretch", "series", "sequence", "spell"],
+    "verb": ["sprint", "dash", "jog", "race", "hurry", "rush"]
+  },
+  "set": {
+    "noun": ["group", "collection", "batch", "assortment", "kit"],
+    "verb": ["place", "put", "arrange", "position", "establish"]
+  },
+  "light": {
+    "noun": ["glow", "illumination", "brightness", "shine", "gleam"],
+    "adjective": ["lightweight", "thin", "mild", "gentle", "faint"]
+  },
+  "present": {
+    "noun": ["gift", "offering"],
+    "verb": ["show", "display", "introduce", "offer", "share"],
+    "adjective": ["current", "existing", "here", "on-hand"]
+  },
+  "record": {
+    "noun": ["log", "account", "entry", "file", "document"],
+    "verb": ["document", "log", "note", "capture", "write down"]
+  },
+  "lead": {
+    "noun": ["edge", "advantage", "front position", "head start"],
+    "verb": ["guide", "direct", "head", "steer", "take charge of"]
+  },
+  "project": {
+    "noun": ["initiative", "undertaking", "venture", "task", "effort"],
+    "verb": ["forecast", "predict", "estimate", "expect", "anticipate"]
+  },
+  "subject": {
+    "noun": ["topic", "matter", "theme", "issue", "area"],
+    "adjective": ["prone", "vulnerable", "susceptible", "liable", "open"]
+  },
+  "address": {
+    "noun": ["location", "place", "residence"],
+    "verb": ["tackle", "handle", "deal with", "take on", "approach"]
+  },
+  "process": {
+    "noun": ["method", "procedure", "steps", "system", "workflow"],
+    "verb": ["handle", "deal with", "work through", "sort through"]
+  },
+  "state": {
+    "noun": ["condition", "situation", "status", "shape", "form"],
+    "verb": ["say", "declare", "mention", "express", "announce"]
+  },
+  "issue": {
+    "noun": ["problem", "concern", "matter", "question", "topic"],
+    "verb": ["release", "publish", "put out", "distribute"]
+  },
+  "drive": {
+    "noun": ["motivation", "push", "ambition", "determination"],
+    "verb": ["push", "fuel", "motivate", "power", "propel"]
+  },
+  "measure": {
+    "noun": ["step", "action", "gauge", "yardstick"],
+    "verb": ["assess", "gauge", "evaluate", "calculate", "size up"]
+  },
+  "figure": {
+    "noun": ["number", "amount", "person", "character"],
+    "verb": ["think", "reckon", "work out", "calculate"]
+  },
+  "order": {
+    "noun": ["arrangement", "sequence", "command", "request"],
+    "verb": ["arrange", "organize", "command", "request", "direct"]
+  },
+  "note": {
+    "noun": ["remark", "comment", "memo", "observation", "message"],
+    "verb": ["observe", "notice", "mention", "point out", "remark"]
+  },
+  "point": {
+    "noun": ["argument", "idea", "spot", "place", "aspect"],
+    "verb": ["indicate", "show", "direct attention to", "highlight"]
+  },
+  "shift": {
+    "noun": ["change", "move", "transition", "adjustment", "swing"],
+    "verb": ["change", "move", "adjust", "switch", "transition"]
+  },
+  "impact": {
+    "noun": ["effect", "influence", "result", "consequence"],
+    "verb": ["affect", "influence", "shape", "change", "alter"]
+  },
+  "approach": {
+    "noun": ["method", "way", "strategy", "technique", "tactic"],
+    "verb": ["near", "get close to", "tackle", "come toward"]
+  },
+  "challenge": {
+    "noun": ["difficulty", "hurdle", "obstacle", "problem", "test"],
+    "verb": ["question", "push back on", "test", "dispute", "confront"]
+  },
+  "focus": {
+    "noun": ["attention", "emphasis", "priority", "center", "target"],
+    "verb": ["concentrate", "zero in on", "center on", "home in on"]
+  },
+  "support": {
+    "noun": ["backing", "help", "assistance", "aid"],
+    "verb": ["back", "help", "assist", "encourage", "champion"]
+  },
+  "target": {
+    "noun": ["goal", "aim", "objective", "mark"],
+    "verb": ["aim at", "focus on", "go after", "zero in on"]
+  },
+  "value": {
+    "noun": ["worth", "benefit", "importance", "merit"],
+    "verb": ["appreciate", "prize", "treasure", "respect"]
+  },
+  "practice": {
+    "noun": ["habit", "custom", "routine", "method", "tradition"],
+    "verb": ["rehearse", "train", "drill", "work on"]
+  },
+  "factor": {
+    "noun": ["element", "component", "aspect", "ingredient", "piece"],
+    "verb": ["consider", "account for", "include", "weigh"]
+  },
+  "conduct": {
+    "noun": ["behavior", "actions", "manner"],
+    "verb": ["carry out", "perform", "do", "run", "manage"]
+  },
+  "monitor": {
+    "noun": ["screen", "display"],
+    "verb": ["watch", "track", "keep an eye on", "observe", "check"]
+  }
 }
