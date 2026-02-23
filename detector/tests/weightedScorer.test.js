@@ -1,7 +1,6 @@
 import { analyzeText } from '../engine/analyzer.js';
 
-// Note: these tests run the full analyzer pipeline
-// The aiMeta analyzer will return null unless API keys are set
+// Note: these tests run the full 7-signal indigenous analyzer pipeline
 describe('analyzeText', () => {
   test('returns proper response structure', async () => {
     const result = await analyzeText('This is a test sentence that should be long enough to analyze properly. We need multiple sentences for the analyzers to work correctly. Here is another sentence with different words.');
@@ -13,9 +12,23 @@ describe('analyzeText', () => {
     expect(result).toHaveProperty('weights');
     expect(result).toHaveProperty('effectiveWeights');
     expect(result).toHaveProperty('metadata');
+    expect(result).toHaveProperty('sentenceScores');
     expect(result.score).toBeGreaterThanOrEqual(0);
     expect(result.score).toBeLessThanOrEqual(1);
     expect(['HUMAN', 'MIXED', 'AI']).toContain(result.classification);
+  });
+
+  test('returns all 7 signal breakdowns', async () => {
+    const result = await analyzeText('Testing all seven signals in the indigenous detector engine. Each signal runs locally on CPU. No API calls are made at any point.');
+
+    expect(result.breakdown).toHaveProperty('statistical');
+    expect(result.breakdown).toHaveProperty('linguistic');
+    expect(result.breakdown).toHaveProperty('sentenceLevel');
+    expect(result.breakdown).toHaveProperty('stylometric');
+    expect(result.breakdown).toHaveProperty('coherence');
+    expect(result.breakdown).toHaveProperty('fingerprint');
+    expect(result.breakdown).toHaveProperty('readabilityForensics');
+    expect(result.metadata.signals).toBe(7);
   });
 
   test('scores known AI text higher than known human text', async () => {
@@ -36,13 +49,9 @@ describe('analyzeText', () => {
     expect(result.score).toBeLessThanOrEqual(1);
   });
 
-  test('weights redistribute when aiMeta is null', async () => {
-    const result = await analyzeText('Test text for weight redistribution analysis with enough words.');
-    // Without API keys, aiMeta should be null and weights redistributed
-    if (result.breakdown.aiMeta === null) {
-      expect(result.effectiveWeights).not.toHaveProperty('aiMeta');
-      const totalWeight = Object.values(result.effectiveWeights).reduce((a, b) => a + b, 0);
-      expect(totalWeight).toBeCloseTo(1.0, 1);
-    }
+  test('effective weights sum to approximately 1.0', async () => {
+    const result = await analyzeText('Test text for weight analysis with enough words to process correctly.');
+    const totalWeight = Object.values(result.effectiveWeights).reduce((a, b) => a + b, 0);
+    expect(totalWeight).toBeCloseTo(1.0, 1);
   });
 });
