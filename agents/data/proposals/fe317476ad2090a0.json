@@ -1,0 +1,10 @@
+{
+  "id": "fe317476ad2090a0",
+  "agent": "Test Agent",
+  "type": "test",
+  "description": "Test proposal",
+  "rationale": "Testing the queue",
+  "data": {},
+  "status": "pending",
+  "createdAt": "2026-02-23T00:42:06.055Z"
+}

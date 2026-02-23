@@ -3,12 +3,12 @@
     {
       "name": "Research Agent",
       "status": "active",
-      "lastRun": "2026-02-22T07:19:06.347Z"
+      "lastRun": "2026-02-23T00:42:06.390Z"
     },
     {
       "name": "Coding Agent",
       "status": "active",
-      "lastRun": "2026-02-22T07:19:06.347Z"
+      "lastRun": "2026-02-23T00:42:06.390Z"
     }
   ],
   "checks": [
@@ -30,7 +30,26 @@
         }
       ],
       "timestamp": "2026-02-22T07:19:06.348Z"
+    },
+    {
+      "results": [
+        {
+          "name": "detector",
+          "status": "unhealthy",
+          "responseTimeMs": 48,
+          "error": "connect ECONNREFUSED 127.0.0.1:3002",
+          "checkedAt": "2026-02-23T00:42:06.386Z"
+        },
+        {
+          "name": "server",
+          "status": "unhealthy",
+          "responseTimeMs": 4,
+          "error": "connect ECONNREFUSED 127.0.0.1:3001",
+          "checkedAt": "2026-02-23T00:42:06.390Z"
+        }
+      ],
+      "timestamp": "2026-02-23T00:42:06.390Z"
     }
   ],
-  "lastCheck": "2026-02-22T07:19:06.348Z"
+  "lastCheck": "2026-02-23T00:42:06.390Z"
 }
